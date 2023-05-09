@@ -98,6 +98,7 @@ class AuthController {
         }
 
         req.user = user;
+        console.log(req.user);
         next();
     });
 
@@ -114,6 +115,7 @@ class AuthController {
                     )
                 );
             }
+            console.log(req.params);
             next();
         };
 

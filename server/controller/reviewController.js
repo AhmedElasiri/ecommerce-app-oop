@@ -1,5 +1,6 @@
 const BaseController = require("./BaseController");
 const Review = require("../models/reviewModel");
+const asyncHandler = require("express-async-handler");
 
 class ReviewController extends BaseController {
     constructor() {
@@ -11,6 +12,7 @@ class ReviewController extends BaseController {
         if (req.params.categoryId)
             filterObject = { mainCategory: req.params.categoryId };
         req.filterObject = filterObject;
+
         next();
     }
 
@@ -25,45 +27,45 @@ class ReviewController extends BaseController {
      *  @route       GET /api/v1/reviews
      *  @access      Public
      */
-    async getReviews(req, res, next) {
+    getReviews = asyncHandler(async (req, res, next) => {
         await super.getAll(req, res, next);
-    }
+    });
 
     /**
      *  @description Get review
      *  @route       GET /api/v1/reviews/:id
      *  @access      Public
      */
-    async getReview(req, res, next) {
+    getReview = asyncHandler(async (req, res, next) => {
         await super.getOne(req, res, next);
-    }
+    });
 
     /**
      *  @description Create review
      *  @route       POST /api/v1/reviews
      *  @access      Private/Protect/User
      */
-    async createReview(req, res, next) {
+    createReview = asyncHandler(async (req, res, next) => {
         await super.createOne(req, res, next);
-    }
+    });
 
     /**
      *  @description Update review
      *  @route       POST /api/v1/reviews/:id
      *  @access      Private/Protect/User
      */
-    async updateReview(req, res, next) {
+    updateReview = asyncHandler(async (req, res, next) => {
         await super.updateOne(req, res, next);
-    }
+    });
 
     /**
      *  @description Delete review
      *  @route       DELETE /api/reviews/:id
      *  @access      Private/Protect/User-Admin-Manager
      */
-    async deleteReview(req, res, next) {
+    deleteReview = asyncHandler(async (req, res, next) => {
         await super.deleteOne(req, res, next);
-    }
+    });
 }
 
 module.exports = new ReviewController();
